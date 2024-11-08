@@ -40,7 +40,10 @@ class _EmployeeListScreenState extends State<EmployeeListScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.primaryColor,
-        title: const Text(employeeListScreenTitle),
+        title: const Text(
+          employeeListScreenTitle,
+          style: TextStyle(color: Colors.white),
+        ),
       ),
       body: BlocListener<EmployeeListScreenBloc, EmployeeListScreenState>(
         listener: (BuildContext context, state) {
@@ -78,6 +81,8 @@ class _EmployeeListScreenState extends State<EmployeeListScreen> {
             },
           );
         },
+        backgroundColor: AppColors.primaryColor,
+        foregroundColor: Colors.white,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(10.0)),
         ),

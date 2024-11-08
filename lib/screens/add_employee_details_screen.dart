@@ -63,9 +63,13 @@ class _AddEmployeeDetailsScreenState extends State<AddEmployeeDetailsScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.primaryColor,
-        title: Text(widget.employee != null
-            ? editEmployeeDetailsScreenTitle
-            : addEmployeeDetailsScreenTitle),
+        title: Text(
+          widget.employee != null
+              ? editEmployeeDetailsScreenTitle
+              : addEmployeeDetailsScreenTitle,
+          style: const TextStyle(color: Colors.white),
+        ),
+        automaticallyImplyLeading: false,
         actions: [
           if (widget.employee != null) ...[
             IconButton(
