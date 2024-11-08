@@ -84,7 +84,7 @@ class _EmployeeListScreenState extends State<EmployeeListScreen> {
         backgroundColor: AppColors.primaryColor,
         foregroundColor: Colors.white,
         shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+          borderRadius: BorderRadius.all(Radius.circular(8.0)),
         ),
         child: const Icon(Icons.add),
       ),
