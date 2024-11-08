@@ -324,10 +324,8 @@ class _AddEmployeeDetailsScreenState extends State<AddEmployeeDetailsScreen> {
                                     ? AppColors.primaryColor
                                     : const Color(0xffEDF8FF),
                             onPressed: () {
-                              setState(() {
-                                dateRangePickerController.selectedDate =
-                                    getDateForSelectedEnum(DateSelection.today);
-                              });
+                              dateRangePickerController.selectedDate =
+                                  getDateForSelectedEnum(DateSelection.today);
                             },
                           ),
                         ),
@@ -344,11 +342,9 @@ class _AddEmployeeDetailsScreenState extends State<AddEmployeeDetailsScreen> {
                                     ? AppColors.primaryColor
                                     : const Color(0xffEDF8FF),
                             onPressed: () {
-                              setState(() {
-                                dateRangePickerController.selectedDate =
-                                    getDateForSelectedEnum(
-                                        DateSelection.nextMonday);
-                              });
+                              dateRangePickerController.selectedDate =
+                                  getDateForSelectedEnum(
+                                      DateSelection.nextMonday);
                             },
                           ),
                         ),
@@ -368,11 +364,9 @@ class _AddEmployeeDetailsScreenState extends State<AddEmployeeDetailsScreen> {
                                     ? AppColors.primaryColor
                                     : const Color(0xffEDF8FF),
                             onPressed: () {
-                              setState(() {
-                                dateRangePickerController.selectedDate =
-                                    getDateForSelectedEnum(
-                                        DateSelection.nextTuesday);
-                              });
+                              dateRangePickerController.selectedDate =
+                                  getDateForSelectedEnum(
+                                      DateSelection.nextTuesday);
                             },
                           ),
                         ),
@@ -389,11 +383,9 @@ class _AddEmployeeDetailsScreenState extends State<AddEmployeeDetailsScreen> {
                                     ? AppColors.primaryColor
                                     : const Color(0xffEDF8FF),
                             onPressed: () {
-                              setState(() {
-                                dateRangePickerController.selectedDate =
-                                    getDateForSelectedEnum(
-                                        DateSelection.after1Week);
-                              });
+                              dateRangePickerController.selectedDate =
+                                  getDateForSelectedEnum(
+                                      DateSelection.after1Week);
                             },
                           ),
                         )
@@ -435,10 +427,8 @@ class _AddEmployeeDetailsScreenState extends State<AddEmployeeDetailsScreen> {
                                     ? AppColors.primaryColor
                                     : const Color(0xffEDF8FF),
                             onPressed: () {
-                              setState(() {
-                                dateRangePickerController.selectedDate =
-                                    getDateForSelectedEnum(DateSelection.today);
-                              });
+                              dateRangePickerController.selectedDate =
+                                  getDateForSelectedEnum(DateSelection.today);
                             },
                           ),
                         )
