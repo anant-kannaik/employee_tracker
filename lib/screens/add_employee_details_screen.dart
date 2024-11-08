@@ -177,6 +177,7 @@ class _AddEmployeeDetailsScreenState extends State<AddEmployeeDetailsScreen> {
                   child: Align(
                     alignment: Alignment.bottomCenter,
                     child: Container(
+                      height: 64.0,
                       decoration: const BoxDecoration(
                         border: Border(
                           top: BorderSide(
@@ -186,10 +187,10 @@ class _AddEmployeeDetailsScreenState extends State<AddEmployeeDetailsScreen> {
                         ),
                       ),
                       padding: const EdgeInsets.symmetric(
-                          vertical: 5.0, horizontal: 16.0),
+                          vertical: 12.0, horizontal: 16.0),
                       child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          const Expanded(child: SizedBox()),
                           CustomTextButton(
                             title: cancelButtonText,
                             foregroundColor: AppColors.primaryColor,
