@@ -276,9 +276,7 @@ class _AddEmployeeDetailsScreenState extends State<AddEmployeeDetailsScreen> {
                   ),
                 ),
                 onTap: () {
-                  setState(() {
-                    _employeeRoleController.text = roleTypes[index];
-                  });
+                  _employeeRoleController.text = roleTypes[index];
                   Navigator.of(context).pop();
                 },
               );
