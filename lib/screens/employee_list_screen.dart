@@ -45,29 +45,27 @@ class _EmployeeListScreenState extends State<EmployeeListScreen> {
           style: TextStyle(color: Colors.white),
         ),
       ),
-      body: BlocListener<EmployeeListScreenBloc, EmployeeListScreenState>(
+      body: BlocConsumer<EmployeeListScreenBloc, EmployeeListScreenState>(
         listener: (BuildContext context, state) {
           if (state is EmployeeListScreenFetchedState) {
-            setState(() {
-              _currentEmployees.clear();
-              _previousEmployees.clear();
-              _currentEmployees.addAll(state.currentEmployees);
-              _previousEmployees.addAll(state.previousEmployees);
-            });
+            _currentEmployees.clear();
+            _previousEmployees.clear();
+            _currentEmployees.addAll(state.currentEmployees);
+            _previousEmployees.addAll(state.previousEmployees);
           } else if (state is EmployeeListScreenDeletedState) {
-            setState(() {
-              if (state.isCurrentEmployee) {
-                _currentEmployees.remove(state.employee);
-              } else {
-                _previousEmployees.remove(state.employee);
-              }
-            });
+            if (state.isCurrentEmployee) {
+              _currentEmployees.remove(state.employee);
+            } else {
+              _previousEmployees.remove(state.employee);
+            }
             showSnackBar(context, employeeDataDeletedMessage);
           }
         },
-        child: SafeArea(
-          child: _getEmployeeListView(),
-        ),
+        builder: (BuildContext context, Object? state) {
+          return SafeArea(
+            child: _getEmployeeListView(),
+          );
+        },
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
