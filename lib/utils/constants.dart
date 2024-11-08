@@ -29,7 +29,7 @@ const List<String> roleTypes = [
   'Product Owner'
 ];
 
-const dateFormat = 'dd MMM y';
+const dateFormat = 'dd MMM, y';
 
 enum DateSelection { today, nextMonday, nextTuesday, after1Week, noDate, empty }
 
@@ -39,8 +39,8 @@ const leavingDateGreaterThanJoiningDateMessage =
     'Leaving date cannot be greater than joining date';
 const employeeDataDeletedMessage = 'Employee data has been deleted';
 
-const currentEmployeesText = 'Current Employees';
-const previousEmployeesText = 'Previous Employees';
+const currentEmployeesText = 'Current employees';
+const previousEmployeesText = 'Previous employees';
 
 const swipeLeftToDeleteMessage = 'Swipe left to delete';
 
