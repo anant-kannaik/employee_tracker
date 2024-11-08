@@ -306,7 +306,7 @@ class _AddEmployeeDetailsScreenState extends State<AddEmployeeDetailsScreen> {
               contentPadding: const EdgeInsets.all(16.0),
               insetPadding: const EdgeInsets.symmetric(horizontal: 16.0),
               shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10.0))),
+                  borderRadius: BorderRadius.all(Radius.circular(16.0))),
               content: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -450,6 +450,12 @@ class _AddEmployeeDetailsScreenState extends State<AddEmployeeDetailsScreen> {
                     width: MediaQuery.of(context).size.width,
                     height: 260.0,
                     child: SfDateRangePicker(
+                      showNavigationArrow: true,
+                      todayHighlightColor: AppColors.primaryColor,
+                      selectionColor: AppColors.primaryColor,
+                      backgroundColor: Colors.transparent,
+                      headerStyle: const DateRangePickerHeaderStyle(
+                          backgroundColor: Colors.transparent),
                       controller: dateRangePickerController,
                       onSelectionChanged:
                           (dateRangePickerSelectionChangedArgs) {
