@@ -81,6 +81,7 @@ class _AddEmployeeDetailsScreenState extends State<AddEmployeeDetailsScreen> {
               },
               icon: const Icon(
                 CupertinoIcons.delete,
+                color: Colors.white,
                 size: 22.0,
               ),
             )
