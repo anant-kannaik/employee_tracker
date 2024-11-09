@@ -27,3 +27,11 @@ class UpdateEmployeeEvent extends AddEmployeeDetailsScreenEvent {
       required this.fromDate,
       required this.toDate});
 }
+
+class DateSelectionChangedEvent extends AddEmployeeDetailsScreenEvent {
+  final bool isFromDate;
+  final String selectedDate;
+
+  DateSelectionChangedEvent(
+      {required this.isFromDate, required this.selectedDate});
+}

@@ -88,7 +88,7 @@ class _AddEmployeeDetailsScreenState extends State<AddEmployeeDetailsScreen> {
           ]
         ],
       ),
-      body: BlocListener<AddEmployeeDetailsScreenBloc,
+      body: BlocConsumer<AddEmployeeDetailsScreenBloc,
           AddEmployeeDetailsScreenState>(
         listener: (BuildContext context, state) {
           if (state is AddEmployeeDetailsScreenInsertedState) {
@@ -99,146 +99,154 @@ class _AddEmployeeDetailsScreenState extends State<AddEmployeeDetailsScreen> {
             Navigator.pop(context);
           } else if (state is AddEmployeeDetailsScreenErrorState) {
             showSnackBar(context, state.error.message);
+          } else if (state is DateSelectionChangedState) {
+            if (state.isFromDate) {
+              _selectedFromDate = state.selectedDate;
+            } else {
+              _selectedToDate = state.selectedDate;
+            }
           }
         },
-        child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.only(top: 24.0),
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: CustomTextField(
-                    hintText: employeeNameHintText,
-                    controller: _employeeNameController,
-                    readOnly: false,
-                    prefixIcon: const Icon(
-                      Icons.person_outline,
-                      color: AppColors.primaryColor,
+        builder: (BuildContext context, AddEmployeeDetailsScreenState state) {
+          return SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 24.0),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: CustomTextField(
+                      hintText: employeeNameHintText,
+                      controller: _employeeNameController,
+                      readOnly: false,
+                      prefixIcon: const Icon(
+                        Icons.person_outline,
+                        color: AppColors.primaryColor,
+                      ),
                     ),
                   ),
-                ),
-                const SizedBox(height: 20.0),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: CustomTextField(
-                    hintText: selectRoleHintText,
-                    controller: _employeeRoleController,
-                    readOnly: true,
-                    prefixIcon: const Icon(
-                      CupertinoIcons.bag,
-                      color: AppColors.primaryColor,
+                  const SizedBox(height: 20.0),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: CustomTextField(
+                      hintText: selectRoleHintText,
+                      controller: _employeeRoleController,
+                      readOnly: true,
+                      prefixIcon: const Icon(
+                        CupertinoIcons.bag,
+                        color: AppColors.primaryColor,
+                      ),
+                      suffixIcon: const Icon(
+                        Icons.arrow_drop_down,
+                        color: AppColors.primaryColor,
+                      ),
+                      onTap: () {
+                        showRolesBottomSheet();
+                      },
                     ),
-                    suffixIcon: const Icon(
-                      Icons.arrow_drop_down,
-                      color: AppColors.primaryColor,
-                    ),
-                    onTap: () {
-                      showRolesBottomSheet();
-                    },
                   ),
-                ),
-                const SizedBox(height: 20.0),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        flex: 3,
-                        child: CustomDateView(
-                          selectedDate: _selectedFromDate,
-                          onTap: () {
-                            _showDateTimePickerDialog(true);
-                          },
-                        ),
-                      ),
-                      const Expanded(
-                        flex: 1,
-                        child: Icon(
-                          Icons.arrow_forward,
-                          color: AppColors.primaryColor,
-                          size: 20.0,
-                        ),
-                      ),
-                      Expanded(
-                        flex: 3,
-                        child: CustomDateView(
-                          selectedDate: _selectedToDate,
-                          onTap: () {
-                            _showDateTimePickerDialog(false);
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Expanded(
-                  child: Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Container(
-                      height: 64.0,
-                      decoration: const BoxDecoration(
-                        border: Border(
-                          top: BorderSide(
-                            color: Colors.black38,
-                            width: 1.0,
-                          ),
-                        ),
-                      ),
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 12.0, horizontal: 16.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          CustomTextButton(
-                            title: cancelButtonText,
-                            foregroundColor: AppColors.primaryColor,
-                            backgroundColor: const Color(0xffEDF8FF),
-                            onPressed: () {
-                              Navigator.pop(context);
+                  const SizedBox(height: 20.0),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          flex: 3,
+                          child: CustomDateView(
+                            selectedDate: _selectedFromDate,
+                            onTap: () {
+                              _showDateTimePickerDialog(true);
                             },
                           ),
-                          const SizedBox(width: 16.0),
-                          CustomTextButton(
-                            title: saveButtonText,
-                            foregroundColor: Colors.white,
-                            backgroundColor: AppColors.primaryColor,
-                            onPressed: () {
-                              if (widget.employee != null) {
-                                BlocProvider.of<AddEmployeeDetailsScreenBloc>(
-                                        context)
-                                    .add(
-                                  UpdateEmployeeEvent(
-                                    id: widget.employee!.id!,
-                                    name: _employeeNameController.text.trim(),
-                                    role: _employeeRoleController.text.trim(),
-                                    fromDate: _selectedFromDate,
-                                    toDate: _selectedToDate,
-                                  ),
-                                );
-                              } else {
-                                BlocProvider.of<AddEmployeeDetailsScreenBloc>(
-                                        context)
-                                    .add(
-                                  InsertEmployeeEvent(
-                                    name: _employeeNameController.text.trim(),
-                                    role: _employeeRoleController.text.trim(),
-                                    fromDate: _selectedFromDate,
-                                    toDate: _selectedToDate,
-                                  ),
-                                );
-                              }
+                        ),
+                        const Expanded(
+                          flex: 1,
+                          child: Icon(
+                            Icons.arrow_forward,
+                            color: AppColors.primaryColor,
+                            size: 20.0,
+                          ),
+                        ),
+                        Expanded(
+                          flex: 3,
+                          child: CustomDateView(
+                            selectedDate: _selectedToDate,
+                            onTap: () {
+                              _showDateTimePickerDialog(false);
                             },
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
-                )
-              ],
+                  Expanded(
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Container(
+                        height: 64.0,
+                        decoration: const BoxDecoration(
+                          border: Border(
+                            top: BorderSide(
+                              color: Colors.black38,
+                              width: 1.0,
+                            ),
+                          ),
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 12.0, horizontal: 16.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            CustomTextButton(
+                              title: cancelButtonText,
+                              foregroundColor: AppColors.primaryColor,
+                              backgroundColor: const Color(0xffEDF8FF),
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                            ),
+                            const SizedBox(width: 16.0),
+                            CustomTextButton(
+                              title: saveButtonText,
+                              foregroundColor: Colors.white,
+                              backgroundColor: AppColors.primaryColor,
+                              onPressed: () {
+                                if (widget.employee != null) {
+                                  BlocProvider.of<AddEmployeeDetailsScreenBloc>(
+                                          context)
+                                      .add(
+                                    UpdateEmployeeEvent(
+                                      id: widget.employee!.id!,
+                                      name: _employeeNameController.text.trim(),
+                                      role: _employeeRoleController.text.trim(),
+                                      fromDate: _selectedFromDate,
+                                      toDate: _selectedToDate,
+                                    ),
+                                  );
+                                } else {
+                                  BlocProvider.of<AddEmployeeDetailsScreenBloc>(
+                                          context)
+                                      .add(
+                                    InsertEmployeeEvent(
+                                      name: _employeeNameController.text.trim(),
+                                      role: _employeeRoleController.text.trim(),
+                                      fromDate: _selectedFromDate,
+                                      toDate: _selectedToDate,
+                                    ),
+                                  );
+                                }
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              ),
             ),
-          ),
-        ),
+          );
+        },
       ),
     );
   }
@@ -512,7 +520,11 @@ class _AddEmployeeDetailsScreenState extends State<AddEmployeeDetailsScreen> {
                             foregroundColor: Colors.white,
                             backgroundColor: AppColors.primaryColor,
                             onPressed: () {
-                              _onDateSelectionChanged(isFromDate, selectedDate);
+                              BlocProvider.of<AddEmployeeDetailsScreenBloc>(
+                                      this.context)
+                                  .add(DateSelectionChangedEvent(
+                                      isFromDate: isFromDate,
+                                      selectedDate: selectedDate));
                               Navigator.pop(context);
                             },
                           ),
@@ -527,15 +539,5 @@ class _AddEmployeeDetailsScreenState extends State<AddEmployeeDetailsScreen> {
         );
       },
     );
-  }
-
-  void _onDateSelectionChanged(bool isFromDate, String selectedDate) {
-    setState(() {
-      if (isFromDate) {
-        _selectedFromDate = selectedDate;
-      } else {
-        _selectedToDate = selectedDate;
-      }
-    });
   }
 }

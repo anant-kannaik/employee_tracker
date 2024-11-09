@@ -13,6 +13,7 @@ class AddEmployeeDetailsScreenBloc
       : super(AddEmployeeDetailsScreenInitialState()) {
     on<InsertEmployeeEvent>(_handleInsertEmployee);
     on<UpdateEmployeeEvent>(_handleUpdateEmployee);
+    on<DateSelectionChangedEvent>(_handleDateSelectionChanged);
   }
 
   void _handleInsertEmployee(InsertEmployeeEvent event,
@@ -71,5 +72,11 @@ class AddEmployeeDetailsScreenBloc
 
       emit(AddEmployeeDetailsScreenUpdatedState(employee: employee));
     }
+  }
+
+  void _handleDateSelectionChanged(DateSelectionChangedEvent event,
+      Emitter<AddEmployeeDetailsScreenState> emit) {
+    emit(DateSelectionChangedState(
+        isFromDate: event.isFromDate, selectedDate: event.selectedDate));
   }
 }

@@ -25,3 +25,11 @@ class AddEmployeeDetailsScreenUpdatedState
 
   AddEmployeeDetailsScreenUpdatedState({required this.employee});
 }
+
+class DateSelectionChangedState extends AddEmployeeDetailsScreenState {
+  final bool isFromDate;
+  final String selectedDate;
+
+  DateSelectionChangedState(
+      {required this.isFromDate, required this.selectedDate});
+}
