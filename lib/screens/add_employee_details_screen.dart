@@ -148,8 +148,7 @@ class _AddEmployeeDetailsScreenState extends State<AddEmployeeDetailsScreen> {
                         child: CustomDateView(
                           selectedDate: _selectedFromDate,
                           onTap: () {
-                            _showDateTimePickerDialog(
-                                true, DateSelection.today);
+                            _showDateTimePickerDialog(true);
                           },
                         ),
                       ),
@@ -166,8 +165,7 @@ class _AddEmployeeDetailsScreenState extends State<AddEmployeeDetailsScreen> {
                         child: CustomDateView(
                           selectedDate: _selectedToDate,
                           onTap: () {
-                            _showDateTimePickerDialog(
-                                false, DateSelection.noDate);
+                            _showDateTimePickerDialog(false);
                           },
                         ),
                       ),
@@ -287,13 +285,15 @@ class _AddEmployeeDetailsScreenState extends State<AddEmployeeDetailsScreen> {
     );
   }
 
-  _showDateTimePickerDialog(bool isFromDate, DateSelection preSelectedDate) {
+  _showDateTimePickerDialog(bool isFromDate) {
     DateRangePickerController dateRangePickerController =
         DateRangePickerController();
-    DateSelection selectedButton = preSelectedDate;
-    String selectedDate = preSelectedDate == DateSelection.noDate
+    DateSelection selectedButton =
+        getPreSelectedDateSelection(isFromDate, widget.employee);
+    String selectedDate = selectedButton == DateSelection.noDate
         ? noDateHintText
-        : getFormattedDateTime(getDateForSelectedEnum(selectedButton));
+        : getFormattedDateTime(
+            getPreSelectedDate(isFromDate, selectedButton, widget.employee));
 
     showDialog(
       context: context,
@@ -446,9 +446,10 @@ class _AddEmployeeDetailsScreenState extends State<AddEmployeeDetailsScreen> {
                       headerStyle: const DateRangePickerHeaderStyle(
                           backgroundColor: Colors.transparent),
                       controller: dateRangePickerController,
-                      initialSelectedDate: selectedButton == DateSelection.today
-                          ? getDateForSelectedEnum(DateSelection.today)
-                          : null,
+                      initialSelectedDate:
+                          selectedButton == DateSelection.noDate
+                              ? null
+                              : getDateFromString(selectedDate),
                       onSelectionChanged:
                           (dateRangePickerSelectionChangedArgs) {
                         if (dateRangePickerSelectionChangedArgs.value != null) {

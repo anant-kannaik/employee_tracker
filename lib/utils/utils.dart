@@ -28,7 +28,9 @@ DateTime getDateForSelectedEnum(DateSelection selectedDate) {
 }
 
 DateSelection getEnumForSelectedDate(String selectedDate) {
-  if (selectedDate == getFormattedDateTime(DateTime.now())) {
+  if (selectedDate == noDateHintText) {
+    return DateSelection.noDate;
+  } else if (selectedDate == getFormattedDateTime(DateTime.now())) {
     return DateSelection.today;
   } else if (selectedDate ==
       getFormattedDateTime(DateTime.now().next(DateTime.monday))) {
@@ -40,7 +42,30 @@ DateSelection getEnumForSelectedDate(String selectedDate) {
       getFormattedDateTime(DateTime.now().next(DateTime.now().weekday))) {
     return DateSelection.after1Week;
   } else {
-    return DateSelection.empty;
+    return DateSelection.date;
+  }
+}
+
+DateSelection getPreSelectedDateSelection(bool isFromDate, Employee? employee) {
+  if (isFromDate) {
+    return employee != null
+        ? getEnumForSelectedDate(employee.fromDate)
+        : DateSelection.today;
+  } else {
+    return employee != null
+        ? getEnumForSelectedDate(employee.toDate)
+        : DateSelection.noDate;
+  }
+}
+
+DateTime getPreSelectedDate(
+    bool isFromDate, DateSelection selectedDate, Employee? employee) {
+  if (selectedDate == DateSelection.date) {
+    return isFromDate
+        ? getDateFromString(employee!.fromDate)
+        : getDateFromString(employee!.toDate);
+  } else {
+    return getDateForSelectedEnum(selectedDate);
   }
 }
 

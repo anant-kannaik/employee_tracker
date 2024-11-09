@@ -31,7 +31,7 @@ const List<String> roleTypes = [
 
 const dateFormat = 'dd MMM, y';
 
-enum DateSelection { today, nextMonday, nextTuesday, after1Week, noDate, empty }
+enum DateSelection { today, nextMonday, nextTuesday, after1Week, noDate, date }
 
 const appErrorCode = '0';
 const enterEmployeeNameAndRoleMessage = 'Please enter employee name and role';
