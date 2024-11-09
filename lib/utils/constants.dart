@@ -38,6 +38,7 @@ const enterEmployeeNameAndRoleMessage = 'Please enter employee name and role';
 const leavingDateGreaterThanJoiningDateMessage =
     'Leaving date cannot be greater than joining date';
 const employeeDataDeletedMessage = 'Employee data has been deleted';
+const employeeDataUndoDeleteMessage = 'Employee data delete has been undid';
 
 const currentEmployeesText = 'Current employees';
 const previousEmployeesText = 'Previous employees';

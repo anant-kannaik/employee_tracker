@@ -11,3 +11,11 @@ class DeleteEmployeeEvent extends EmployeeListScreenEvent {
   DeleteEmployeeEvent(
       {required this.isCurrentEmployee, required this.employee});
 }
+
+class UndoDeleteEmployeeEvent extends EmployeeListScreenEvent {
+  final bool isCurrentEmployee;
+  final Employee employee;
+
+  UndoDeleteEmployeeEvent(
+      {required this.isCurrentEmployee, required this.employee});
+}

@@ -58,7 +58,22 @@ class _EmployeeListScreenState extends State<EmployeeListScreen> {
             } else {
               _previousEmployees.remove(state.employee);
             }
-            showSnackBar(context, employeeDataDeletedMessage);
+            showSnackBarWithAction(
+              context,
+              employeeDataDeletedMessage,
+              () {
+                _employeeListScreenBloc.add(UndoDeleteEmployeeEvent(
+                    isCurrentEmployee: state.isCurrentEmployee,
+                    employee: state.employee));
+              },
+            );
+          } else if (state is EmployeeListScreeUndoDeleteState) {
+            if (state.isCurrentEmployee) {
+              _currentEmployees.add(state.employee);
+            } else {
+              _previousEmployees.add(state.employee);
+            }
+            showSnackBar(context, employeeDataUndoDeleteMessage);
           }
         },
         builder: (BuildContext context, Object? state) {

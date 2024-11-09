@@ -1,4 +1,5 @@
 import 'package:employee_tracker/models/employee.dart';
+import 'package:employee_tracker/utils/app_colors.dart';
 import 'package:employee_tracker/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -7,6 +8,20 @@ void showSnackBar(BuildContext context, String content) {
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
       content: Text(content),
+    ),
+  );
+}
+
+void showSnackBarWithAction(
+    BuildContext context, String content, Function() onPressed) {
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      content: Text(content),
+      action: SnackBarAction(
+        label: 'Undo',
+        textColor: AppColors.primaryColor,
+        onPressed: onPressed,
+      ),
     ),
   );
 }

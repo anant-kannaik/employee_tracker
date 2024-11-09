@@ -9,6 +9,7 @@ class EmployeeListScreenBloc
   EmployeeListScreenBloc() : super(EmployeeListScreenInitialState()) {
     on<FetchEmployeesEvent>(_handleFetchEmployees);
     on<DeleteEmployeeEvent>(_handleDeleteEmployee);
+    on<UndoDeleteEmployeeEvent>(_handleUndoDeleteEmployee);
   }
 
   void _handleFetchEmployees(
@@ -31,6 +32,14 @@ class EmployeeListScreenBloc
     await EmployeeRepository.sharedInstance.deleteEmployee(event.employee.id!);
 
     emit(EmployeeListScreenDeletedState(
+        isCurrentEmployee: event.isCurrentEmployee, employee: event.employee));
+  }
+
+  void _handleUndoDeleteEmployee(UndoDeleteEmployeeEvent event,
+      Emitter<EmployeeListScreenState> emit) async {
+    await EmployeeRepository.sharedInstance.insertEmployee(event.employee);
+
+    emit(EmployeeListScreeUndoDeleteState(
         isCurrentEmployee: event.isCurrentEmployee, employee: event.employee));
   }
 }

@@ -21,3 +21,11 @@ class EmployeeListScreenDeletedState extends EmployeeListScreenState {
   EmployeeListScreenDeletedState(
       {required this.isCurrentEmployee, required this.employee});
 }
+
+class EmployeeListScreeUndoDeleteState extends EmployeeListScreenState {
+  final bool isCurrentEmployee;
+  final Employee employee;
+
+  EmployeeListScreeUndoDeleteState(
+      {required this.isCurrentEmployee, required this.employee});
+}
