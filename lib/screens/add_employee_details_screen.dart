@@ -446,6 +446,9 @@ class _AddEmployeeDetailsScreenState extends State<AddEmployeeDetailsScreen> {
                       headerStyle: const DateRangePickerHeaderStyle(
                           backgroundColor: Colors.transparent),
                       controller: dateRangePickerController,
+                      initialSelectedDate: selectedButton == DateSelection.today
+                          ? getDateForSelectedEnum(DateSelection.today)
+                          : null,
                       onSelectionChanged:
                           (dateRangePickerSelectionChangedArgs) {
                         if (dateRangePickerSelectionChangedArgs.value != null) {
